@@ -1,0 +1,186 @@
+#include <iostream>
+# include<string>
+using namespace std;
+
+class Date
+{
+private:
+	int month, day, year;
+public:
+	
+	string displayMonth(int m)
+	{
+		string s;
+		switch (m)
+		{
+		case 1:
+			s= "January";
+			break;
+		case 2:
+			s= "February";
+			break;
+		case 3:
+			s= "March";
+			break;
+		case 4:
+			s= "April";
+			break;
+		case 5:
+			s= "May";
+			break;
+		case 6:
+			s= "June";
+			break;
+		case 7:
+			s= "July";
+			break;
+		case 8:
+			s= "August";
+			break;
+		case 9:
+			s= "September";
+			break;
+		case 10:
+			s= "October";
+			break;
+		case 11:
+			s= "November";
+			break;
+		case 12:
+			s= "December";
+			break;
+		}
+		return s;
+	}
+	void displayNumerically()
+	{
+		cout << month << "\\" << day << "\\" << "\\" << year << endl;
+	}
+	void displayRegularFormat()
+	{
+		cout << displayMonth(month) << " " << day << "," << year << endl;
+	}
+	void displayOrdered()
+	{
+		cout << day << " " << displayMonth(month) << " " << year << endl;
+	}
+	void setDay(int d)
+	{
+		while (!(d > 0 && d < 32))
+		{
+			cout << "Enter a valid value for day: ";
+			cin >> d;
+		}
+		day = d;
+	}
+	void setMonth(int m)
+	{
+		while (!(m > 0 && m < 13))
+		{
+			cout << "Enter a valid value for month: ";
+			cin >> m;
+		}
+		month = m;
+
+	}
+	void setYear(int y)
+	{
+		year = y;
+	}
+	Date()
+	{
+		month = day = year = 0;
+	}
+	Date operator++()
+	{
+		if (this->day == 31)//this. didnot woerk, thisone did,,why?? //so this holds the adress??
+		{
+			if (month == 12)
+			{
+				day = 1;
+				year = year + 1;
+				month = 1;
+			}
+			else
+			{
+				day = 1;
+				month = month + 1;
+			}
+		}
+		else
+			day++;
+
+		return *this;
+
+}
+	Date operator--()
+	{
+		if (day == 1)
+		{
+			if (month == 1)
+			{
+				day = 31;
+				month = 12;
+				year--;
+			}
+			else
+			{
+				month--;
+				day = 31;
+			}
+		}
+		else
+		day--;
+		return *this;
+		
+	}
+};
+
+int main()
+{
+	Date *d = & Date();
+	d->setYear(1200);
+	d->setMonth(1);
+	d->setDay(23);
+	d->displayNumerically();
+	d->displayOrdered();
+	d->displayRegularFormat();
+	d++;
+	d->displayNumerically();
+	d->displayOrdered();
+	d->displayRegularFormat();
+	Date *p = & Date();
+	p->setDay(1);
+	p->setMonth(1);
+	p->setYear(1000);
+	p->displayNumerically();
+	p->displayOrdered();
+	p->displayRegularFormat();
+	p --;
+	p->displayNumerically();
+	p->displayOrdered();
+	p->displayRegularFormat();
+
+	Date *r = & Date();
+	r->setDay(31);
+	r->setYear(98);
+	r->setMonth(4);
+	r ++;
+
+	r->displayNumerically();
+	r->displayOrdered();
+	r->displayRegularFormat();
+
+	Date *l = &Date();
+	l->setDay(31);
+	l->setYear(98);
+	l->setMonth(12);
+	l ++;
+
+	l->displayNumerically();
+	l->displayOrdered();
+	l->displayRegularFormat();
+	
+	int input;
+	cin >> input;
+}
