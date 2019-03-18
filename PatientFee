@@ -1,0 +1,144 @@
+//Patients Fee:
+
+#include<string>
+#include<iostream>
+
+using namespace std;
+
+class PatientsAccount
+{
+private:
+	const double dailyRate = 100.0;
+	double charges = 0;
+	int days;
+public:
+	double Total()
+	{
+		return (charges + (days*dailyRate));
+	}
+	void updateCharge(double add)
+	{
+		charges += add;
+	}
+	void setDays(int a)
+	{
+		days = a;
+	}
+	PatientsAccount()
+	{
+		days = 0;
+	}
+	
+};
+PatientsAccount *p = &PatientsAccount();
+class Surgery
+{
+private:
+	const double headSurgery = 1000;
+	const double LiverSurgery = 2000;
+	const double HandSurgery = 1500;
+	const double LungSurgery = 3000;
+	const double LegSurgery = 4000;
+	double price;
+public:
+	void setprice(char a)
+	{
+		switch (a)
+		{
+		case'A':
+			price = headSurgery;
+			break;
+		case'B':
+			price = LiverSurgery;
+			break;
+		case'C':
+			price = HandSurgery;
+			break;
+		case'D':
+			price = LungSurgery;
+			break;
+		case'E':
+			price = LegSurgery;
+			break;
+		}
+	}
+	void getPrice()
+	{
+		p->updateCharge(price);
+	}
+	Surgery()
+	{
+		price = 0;
+	}
+};
+
+class Pharmacy
+{
+private:
+	const double pone = 12.23;
+	const double ptwo = 13.0;
+	const double pthree = 14.23;
+	const double pfour = 15.23;
+	const double pfive = 22.23;
+	double medprice;
+public:
+	void setmedprice(char a)
+	{
+		switch (a)
+		{
+		case('1'):
+			medprice = pone;
+			break;
+		case('2'):
+			medprice = ptwo;
+			break;
+		case('3'):
+			medprice = pthree;
+			break;
+		case('4'):
+			medprice = pfour;
+			break;
+		case('5'):
+			medprice = pfive;
+			break;
+		}
+
+	}
+	void getmedprice()
+	{
+		p->updateCharge(medprice);
+	}
+	Pharmacy()
+	{
+		medprice = 0;
+
+	};
+	
+
+};
+int main()
+{
+	Surgery s;
+	Pharmacy m;
+	cout << "Dear Patient: Here is the list of Surgeries you may have with their respective prices:\n" << endl;
+	cout << "('A': headSurgery = (price:$1000))\n('B': LiverSurgery = (price:$2000))\n('C': HandSurgery = (price:$1500))\n('D':LungSurgery = (price:$3000))\n('E': LegSurgery = (price:$4000))" << endl;
+	cout << "Here is the list of medication you may take:\n" << endl;
+	cout << "('1': pone = 12.23)\n('2': ptwo = 13.0)\n('3': ptwo = 13.0)\n('4': pfour = 15.23)\n('5':pfive = 22.23)" << endl;
+	char input;
+	cout << "Enter the surgery you are taking('A'-'E') : ";
+	cin >> input;
+	s.setprice(input);
+	s.getPrice();
+	cout << "Enter the medication you are going to take ('1'-'5') : ";
+	cin >> input;
+	m.setmedprice(input);
+	m.getmedprice();
+	int d;
+	cout << "Enter the number of days you are staying at hospital:";
+	cin >> d;
+	p->setDays(d);
+	double totalcharges= p->Total();
+	cout << "Your total charge is:" << totalcharges << endl;
+	getchar();
+	return 0;
+}
